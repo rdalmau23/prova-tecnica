@@ -12,12 +12,17 @@ export class UserService {
   }
 
   private loadUsers() {
-    this.http.get<User[]>('assets/users.json').subscribe(data => {
-      this.users$.next(data);
-    });
-  }
+  this.http.get<User[]>('assets/users.json').subscribe((users: User[]) => {
+    this.users$.next(users);
+  });
+}
 
   getUsers(): Observable<User[]> {
     return this.users$.asObservable();
   }
+
+  getUserById(id: string): User | undefined {
+    return this.users$.value.find(u => u.id === id);
+  }
 }
+
