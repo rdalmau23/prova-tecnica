@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './user-list.html',
   styleUrl: './user-list.css',
 })
-export class UserListComponent implements OnInit {
+export class UserList implements OnInit {
   users: User[] = [];
 
   constructor(private userService: UserService) {}

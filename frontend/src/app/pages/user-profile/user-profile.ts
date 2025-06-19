@@ -1,25 +1,31 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-profile',
-  standalone: true,
+  templateUrl: './user-profile.html',
+  styleUrls: ['./user-profile.css'],
   imports: [CommonModule],
-  templateUrl: './user-profile.html'
+  standalone: true
+
 })
-export class UserProfileComponent {
-  private route = inject(ActivatedRoute);
-  private userService = inject(UserService);
+export class UserProfileComponent implements OnInit {
+  user: User | undefined;
 
-  user?: User;
+  constructor(
+    private route: ActivatedRoute,
+    private userService: UserService
+  ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
-      this.user = this.userService.getUserById(id);
+      this.userService.getUserById(id).subscribe(user => {
+        this.user = user;
+      });
     }
   }
 }
