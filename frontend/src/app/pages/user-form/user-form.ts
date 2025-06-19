@@ -1,18 +1,18 @@
 import { Component } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user-form',
-  standalone: true,
   templateUrl: './user-form.html',
   styleUrls: ['./user-form.css'],
-  imports: [ReactiveFormsModule, CommonModule]
+  imports: [
+    ReactiveFormsModule,
+  ],
 })
-export class UserFormComponent {
-  userForm!: FormGroup;
+export class UserForm {
+  userForm: FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -27,10 +27,11 @@ export class UserFormComponent {
     });
   }
 
-  onSubmit() {
+  onSubmit(): void {
     if (this.userForm.valid) {
-      this.userService.addUser(this.userForm.value);
-      this.router.navigate(['/users']);
+      this.userService.addUser(this.userForm.value).subscribe(() => {
+        this.router.navigate(['/users']);
+      });
     }
   }
 }
