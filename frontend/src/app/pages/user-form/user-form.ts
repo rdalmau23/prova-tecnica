@@ -6,6 +6,7 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-user-form',
   templateUrl: './user-form.html',
+  standalone: true,
   styleUrls: ['./user-form.css'],
   imports: [
     ReactiveFormsModule,
