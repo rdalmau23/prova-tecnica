@@ -84,7 +84,8 @@ This script will:
 - ✅ Dockerized frontend and backend
 - ✅ Export users to Excel / PDF
 - ✅ User search and filtering
-- ✅ Sorting and pagination
+- ✅ Sorting and pagination (To sort you have to click on the column name, e.g "Name" and it sorts alphabetically)
+- ✅ Delete user
 
 ---
 
