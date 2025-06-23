@@ -21,14 +21,11 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of filteredUsers">
+    <tr *ngFor="let user of filteredUsers" (click)="goToProfile(user.id)" class="clickable-row">
       <td>{{ user.name }}</td>
       <td>{{ user.surname }}</td>
       <td>{{ user.email }}</td>
       <td>{{ user.id }}</td>
-      <td>
-        <a [routerLink]="['/profile', user.id]">Perfil</a>
-      </td>
     </tr>
   </tbody>
 </table>

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import * as XLSX from 'xlsx';
 import { saveAs } from 'file-saver';
 import jsPDF from 'jspdf';
@@ -21,13 +21,16 @@ export class UserList implements OnInit {
   filteredUsers: User[] = [];
   searchTerm: string = '';
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
       this.filteredUsers = users;
     });
+  }
+  goToProfile(userId: string) {
+    this.router.navigate(['/profile', userId]);
   }
 
   filterUsers(): void {
