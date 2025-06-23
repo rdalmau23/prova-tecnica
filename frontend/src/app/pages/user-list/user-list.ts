@@ -34,8 +34,8 @@ export class UserList implements OnInit {
   ngOnInit(): void {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
-      this.totalUsers = users.length;
-      this.filteredUsers = users;
+      this.currentPage = 1;
+      this.filterUsers();
     });
   }
   goToProfile(userId: string) {

@@ -2,34 +2,35 @@ table {
   width: 100%;
   border-collapse: collapse;
   background-color: #fff;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
   border-radius: 8px;
   overflow: hidden;
 }
 
 thead {
-  background-color: #1e88e5;
-  color: white;
+  background-color: #23272b;
+  color: #f5f5f5;
 }
 
 th, td {
   padding: 1rem;
   text-align: left;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #e0e0e0;
 }
 
 tbody tr:hover {
-  background-color: #f1f1f1;
+  background-color: #f6f6f6;
 }
 
 a {
-  color: #1e88e5;
+  color: #444;
   text-decoration: none;
   font-weight: 500;
 }
 
 a:hover {
   text-decoration: underline;
+  color: #23272b;
 }
 
 .top-bar {
@@ -46,16 +47,17 @@ a:hover {
 
 .search-bar input[type="text"] {
   padding: 8px 14px;
-  border: 1px solid #ccc;
+  border: 1px solid #bdbdbd;
   border-radius: 20px;
   font-size: 16px;
   width: 280px;
   transition: border-color 0.2s;
-  
+  background: #fafafa;
+  color: #23272b;
 }
 
 .search-bar input[type="text"]:focus {
-  border-color: #1976d2;
+  border-color: #23272b;
   outline: none;
 }
 
@@ -65,7 +67,7 @@ a:hover {
 }
 
 .export-buttons button {
-  background-color: #1976d2;
+  background-color: #444;
   color: #fff;
   border: none;
   padding: 8px 18px;
@@ -76,7 +78,7 @@ a:hover {
 }
 
 .export-buttons button:hover {
-  background-color: #125ea2;
+  background-color: #23272b;
 }
 
 .pagination {
@@ -88,7 +90,7 @@ a:hover {
 }
 
 .pagination button {
-  background-color: #1976d2;
+  background-color: #444;
   color: #fff;
   border: none;
   padding: 6px 16px;
@@ -99,18 +101,19 @@ a:hover {
 }
 
 .pagination button:disabled {
-  background-color: #b0bec5;
+  background-color: #bdbdbd;
+  color: #fff;
   cursor: not-allowed;
 }
 
 .pagination span {
   font-weight: 500;
-  color: #333;
+  color: #23272b;
 }
 
 .user-count {
   text-align: right;
   margin-bottom: 10px;
-  color: #555;
+  color: #666;
   font-size: 15px;
 }
