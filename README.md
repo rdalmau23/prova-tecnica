@@ -6,7 +6,7 @@ This is a fullstack technical test project built with **Angular**, **Express**, 
 
 ## ⚙️ Technologies Used
 
-- Frontend: Angular 17 
+- Frontend: Angular 20 
 - Backend: Express + Mongoose
 - Database: MongoDB 
 - Containerization: Docker & Docker Compose
