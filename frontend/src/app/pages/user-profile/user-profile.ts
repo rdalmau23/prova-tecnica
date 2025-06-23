@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user.model';
 import { CommonModule } from '@angular/common';
@@ -10,14 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./user-profile.css'],
   imports: [CommonModule],
   standalone: true
-
 })
 export class UserProfileComponent implements OnInit {
   user: User | undefined;
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +25,15 @@ export class UserProfileComponent implements OnInit {
     if (id) {
       this.userService.getUserById(id).subscribe(user => {
         this.user = user;
+      });
+    }
+  }
+
+  deleteUser() {
+    if (this.user && confirm('Seguro que vols eliminar aquest usuari?')) {
+      this.userService.deleteUser(this.user.id).subscribe(() => {
+        alert('Usuario eliminat');
+        this.router.navigate(['/users']);
       });
     }
   }

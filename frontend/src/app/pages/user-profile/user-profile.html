@@ -1,10 +1,14 @@
 <h2>Perfil de l'usuari</h2>
 
-<div *ngIf="user; else notFound">
+<div *ngIf="user; else notFound" class="user-profile">
   <p><strong>Nom:</strong> {{ user.name }}</p>
   <p><strong>Cognoms:</strong> {{ user.surname }}</p>
   <p><strong>Email:</strong> {{ user.email }}</p>
   <p><strong>DNI:</strong> {{ user.id }}</p>
+</div>
+
+<div class="profile-actions">
+  <button (click)="deleteUser()">Eliminar</button>
 </div>
 
 <ng-template #notFound>

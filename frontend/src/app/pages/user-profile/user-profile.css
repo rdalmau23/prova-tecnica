@@ -4,7 +4,7 @@ h2 {
   color: #23272b;
 }
 
-div {
+.user-profile {
   max-width: 500px;
   margin: 0 auto;
   background-color: #ffffff;
@@ -28,4 +28,32 @@ ng-template p {
   text-align: center;
   font-style: italic;
   color: #888;
+}
+
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.profile-actions button {
+  background-color: #b71c1c;
+  color: #fff;
+  border: none;
+  padding: 0.7rem 1.6rem;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.profile-actions button:hover:enabled {
+  background-color: #7f1010;
+}
+
+.profile-actions button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
