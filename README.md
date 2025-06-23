@@ -82,14 +82,14 @@ This script will:
 - ✅ Data persistence with MongoDB
 - ✅ JSON-to-DB migration script
 - ✅ Dockerized frontend and backend
+- ✅ Export users to Excel / PDF
+- ✅ User search and filtering
+- ✅ Sorting and pagination
 
 ---
 
 ## 🧰 To Do / Possible Extras
 
-- User search and filtering
-- Sorting and pagination
-- Export users to Excel / PDF
 - Scheduled JSON export every night
 - Hybrid version with Ionic
 
