@@ -21,11 +21,20 @@ export class UserList implements OnInit {
   filteredUsers: User[] = [];
   searchTerm: string = '';
 
+  currentPage: number = 1;
+  pageSize: number = 10;
+  totalPages: number = 1;
+  totalUsers: number = 0;
+
+  sortColumn: string = '';
+  sortDirection: 'asc' | 'desc' = 'asc';
+
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.userService.getUsers().subscribe(users => {
       this.users = users;
+      this.totalUsers = users.length;
       this.filteredUsers = users;
     });
   }
@@ -33,18 +42,60 @@ export class UserList implements OnInit {
     this.router.navigate(['/profile', userId]);
   }
 
+  sortBy(column: string) {
+  if (this.sortColumn === column) {
+    this.sortDirection = this.sortDirection === 'asc' ? 'desc' : 'asc';
+  } else {
+    this.sortColumn = column;
+    this.sortDirection = 'asc';
+  }
+    this.filterUsers();
+  }
+
   filterUsers(): void {
-    const term = this.searchTerm.trim().toLowerCase();
-    if (!term) {
-      this.filteredUsers = this.users;
-      return;
-    }
-    this.filteredUsers = this.users.filter(user =>
+  const term = this.searchTerm.trim().toLowerCase();
+  let filtered = this.users;
+  if (term) {
+    filtered = this.users.filter(user =>
       user.name.toLowerCase().includes(term) ||
       user.surname.toLowerCase().includes(term) ||
-      user.id.toLowerCase().includes(term) ||
-      user.email.toLowerCase().includes(term)
+      user.email.toLowerCase().includes(term) ||
+      (user.id ? user.id.toLowerCase().includes(term) : false)
     );
+  }
+
+  // Ordenació
+  if (this.sortColumn) {
+    filtered = filtered.sort((a, b) => {
+      const aValue = (a as any)[this.sortColumn]?.toLowerCase?.() ?? '';
+      const bValue = (b as any)[this.sortColumn]?.toLowerCase?.() ?? '';
+      if (aValue < bValue) return this.sortDirection === 'asc' ? -1 : 1;
+      if (aValue > bValue) return this.sortDirection === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }
+
+  this.totalUsers = filtered.length;
+  this.totalPages = Math.ceil(this.totalUsers / this.pageSize) || 1;
+  this.currentPage = Math.min(this.currentPage, this.totalPages);
+  this.filteredUsers = filtered.slice(
+    (this.currentPage - 1) * this.pageSize,
+    this.currentPage * this.pageSize
+  );
+}
+
+  nextPage(): void {
+    if (this.currentPage < this.totalPages) {
+      this.currentPage++;
+      this.filterUsers();
+    }
+  }
+
+  previousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.filterUsers();
+    }
   }
 
   downloadExcel(): void {

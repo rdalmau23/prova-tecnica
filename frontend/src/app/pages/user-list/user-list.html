@@ -1,23 +1,26 @@
-<div class="export-buttons">
-  <button (click)="downloadExcel()">Descarregar Excel</button>
-  <button (click)="downloadPDF()">Descarregar PDF</button>
-</div>
-<div class="search-bar">
-  <input
-    type="text"
-    [(ngModel)]="searchTerm"
-    (ngModelChange)="filterUsers()"
-    placeholder="Cerca per nom, cognom, email o DNI."
-  />
+<div class="top-bar">
+  <div class="export-buttons">
+    <button (click)="downloadExcel()">Descarregar Excel</button>
+    <button (click)="downloadPDF()">Descarregar PDF</button>
+  </div>
+
+  <div class="search-bar">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      (ngModelChange)="filterUsers()"
+      placeholder="Cerca per nom, cognom, email o DNI."
+    />
+  </div>
 </div>
 
 <table>
   <thead>
     <tr>
-      <th>Nom</th>
-      <th>Cognoms</th>
-      <th>Email</th>
-      <th>DNI</th>
+      <th (click)="sortBy('name')">Nom</th>
+      <th (click)="sortBy('surname')">Cognoms</th>
+      <th (click)="sortBy('email')">Email</th>
+      <th (click)="sortBy('id')">DNI</th>
     </tr>
   </thead>
   <tbody>
@@ -29,3 +32,14 @@
     </tr>
   </tbody>
 </table>
+<div class="no-results" *ngIf="filteredUsers.length === 0">
+  <p>No s'han trobat usuaris.</p>
+</div>
+<div class="pagination">
+  <button (click)="previousPage()" [disabled]="currentPage === 1">Anterior</button>
+  <span>Pàgina {{ currentPage }} de {{ totalPages }}</span>
+  <button (click)="nextPage()" [disabled]="currentPage === totalPages">Següent</button>
+</div>
+<div class="user-count">
+  <p>Total d'usuaris: {{ totalUsers }}</p>
+</div>
